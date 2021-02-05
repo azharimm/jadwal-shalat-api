@@ -18,6 +18,7 @@ app.use(express.json());
 app.get("/", indexController.index);
 app.get("/cities", indexController.cities);
 app.get("/daily", indexController.daily);
+app.get("/monthly", indexController.monthy);
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 

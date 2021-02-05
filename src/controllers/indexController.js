@@ -45,7 +45,6 @@ exports.daily = async (req, res) => {
             day = d.split("-")[2];
             let nth = parseInt(day) + 4;
             baseUrl = `${process.env.BASE_URL}/monthly.php?id=${id}&m=${m}&y=${y}`;
-            console.log(baseUrl);
             const htmlResult = await request.get(baseUrl);
             const $ = await cheerio.load(htmlResult);
             date = $(".table_title").children("td").eq(2).children("b").text();
@@ -111,6 +110,68 @@ exports.daily = async (req, res) => {
         }
         date = day + " " + date;
         return json(res, { date, region, data });
+    } catch (error) {
+        return errorJson(res, error);
+    }
+};
+
+exports.monthy = async (req, res) => {
+    try {
+        const htmlResult = await request.get(`${process.env.BASE_URL}`);
+        const $ = await cheerio.load(htmlResult);
+        const data = [];
+        const month = $(".table_title")
+            .children("td")
+            .eq(2)
+            .children("b")
+            .text();
+        const region = $(".table_title")
+            .children("td")
+            .eq(2)
+            .children("small")
+            .text();
+
+        $(".table_adzan")
+            .find("tr")
+            .each((idx, el) => {
+                if (idx > 4) {
+                    let date = month;
+                    let dataRow = [];
+                    let day;
+                    $(el)
+                        .children("td")
+                        .each((index, element) => {
+                            if (index === 0) {
+                                day = parseInt($(element).text());
+                                if (isNaN(day)) {
+                                    return;
+                                }
+                                date = day + " " + date;
+                            }
+                            if (index > 0) {
+                                let name;
+                                let time = $(element).text();
+                                if (index === 1) {
+                                    name = "Shubuh";
+                                } else if (index === 2) {
+                                    name = "Dzuhur";
+                                } else if (index === 3) {
+                                    name = "Ashr";
+                                } else if (index === 4) {
+                                    name = "Maghrib";
+                                } else if (index === 5) {
+                                    name = "Isya";
+                                }
+                                dataRow.push({ name, time });
+                            }
+                        });
+                    if (!isNaN(day)) {
+                        data.push({ date, dataRow });
+                    }
+                }
+            });
+
+        return json(res, { month, region, data });
     } catch (error) {
         return errorJson(res, error);
     }
