@@ -8,6 +8,16 @@ exports.index = (req, res) => {
     return json(res, {
         maintainer: "Azhari Muhammad M <azhari.marzan@gmail.com>",
         source: "https://github.com/azharimm/jadwal-shalat-api",
+        daily: {
+            endpoint: fullUrl+'daily',
+            example: fullUrl+'daily?date=2021-01-06&cityId=58',
+            description: 'Show shalat schedule per day',
+        },
+        monthly: {
+            endpoint: fullUrl+'monthly',
+            example: fullUrl+'monthly?month=2021-01&cityId=58',
+            description: 'Show list of schedules per month',
+        }
     });
 };
 
