@@ -117,7 +117,16 @@ exports.daily = async (req, res) => {
 
 exports.monthy = async (req, res) => {
     try {
-        const htmlResult = await request.get(`${process.env.BASE_URL}`);
+        const d = req.query.month;
+        let baseUrl = `${process.env.BASE_URL}`;
+        let id = req.query.cityId;
+        if (!id) id = 83;
+        if(d) {
+            let m = d.split("-")[1];
+            let y = d.split("-")[0];
+            baseUrl = `${process.env.BASE_URL}/monthly.php?id=${id}&m=${m}&y=${y}`;
+        }
+        const htmlResult = await request.get(baseUrl);
         const $ = await cheerio.load(htmlResult);
         const data = [];
         const month = $(".table_title")
