@@ -8,6 +8,11 @@ exports.index = (req, res) => {
     return json(res, {
         maintainer: "Azhari Muhammad M <azhari.marzan@gmail.com>",
         source: "https://github.com/azharimm/jadwal-shalat-api",
+        cities: {
+            endpoint: fullUrl+'cities',
+            example: fullUrl+'cities',
+            description: 'Show list of cities available',
+        },
         daily: {
             endpoint: fullUrl+'daily',
             example: fullUrl+'daily?date=2021-01-06&cityId=58',
