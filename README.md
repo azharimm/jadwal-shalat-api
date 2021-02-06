@@ -8,7 +8,7 @@
 [GET] https://jadwal-shalat-api.herokuapp.com/cities
 ```
 
-## 1. Daily Schedule
+## 2. Daily Schedule
 ```
 [ENDPOINT] /daily
 ```
@@ -22,7 +22,7 @@
 | date | Y-m-d format | `no` default today |
 | cityId | ID of the city | `no` default jakarta (+7 GMT) |
 
-## 1. Monthly Schedule
+## 3. Monthly Schedule
 ```
 [ENDPOINT] /monthly
 ```
