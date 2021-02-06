@@ -5,7 +5,7 @@
 [ENDPOINT] /cities
 ```
 ```
-[GET] http://localhost:5000/cities
+[GET] https://jadwal-shalat-api.herokuapp.com/cities
 ```
 
 ## 1. Daily Schedule
@@ -13,7 +13,7 @@
 [ENDPOINT] /daily
 ```
 ```
-[GET] http://localhost:5000/daily?date=2021-01-06&cityId=58
+[GET] https://jadwal-shalat-api.herokuapp.com/daily?date=2021-01-06&cityId=58
 ```
 
 ### Query params
@@ -27,7 +27,7 @@
 [ENDPOINT] /monthly
 ```
 ```
-[GET] http://localhost:5000/monthly?month=2021-01&cityId=58
+[GET] https://jadwal-shalat-api.herokuapp.com/monthly?month=2021-01&cityId=58
 ```
 
 ### Query params
